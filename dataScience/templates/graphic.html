@@ -11,14 +11,48 @@
     </head>
     <body>
         <div class="container">
-            <h1>Data Science</h1>
-            <div class="row">
-                <canvas id="productsChart" width="300" height="300"></canvas>
-                {{ csvObjectColumns }}
+            <div>
+                <h1>Data Science</h1>
+                <button href="/">
+                    Voltar
+                </button>
             </div>
+            <div class="row">
+                <canvas id="GraphicChart" width="600" height="300"></canvas>
+            </div>
+
         </div>
     </body>
     <script>
-        var ctx = document.getElementById("productsChart");
+        var ctx = document.getElementById("GraphicChart");
+        var labels = {{ labelsColumns|safe }};
+        var datas  = {{ valuesColumns|safe }};
+        var typeChart = '{{ typeChart|safe }}';
+        
+        datas      = JSON.stringify(datas).replace('[[', '[').replace(']]', ']');
+        datas      = JSON.parse(datas);
+
+        var GraphicChart = new Chart(ctx, {
+            type: typeChart,
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Graficos',
+                    data: datas,
+                    backgroundColor: "#f38b4a" ,
+                    borderColor: 'rgba(255,99,132,1)' ,
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero:true
+                        }
+                    }]
+                }
+            }
+        });
     </script>
 </html>

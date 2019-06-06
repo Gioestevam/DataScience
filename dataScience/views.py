@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.core.files.storage import FileSystemStorage
 import pandas as pda
+import json as json
 
 # Create your views here.
 def dataScienceHtml(request):
@@ -10,7 +11,16 @@ def dataScienceHtml(request):
         filename = fs.save(my_file.name, my_file)
         fileUrl  = fs.url(filename)
         csvObject = pda.read_csv(fileUrl)
-        print(csvObject.head(5))
-        return render(request, 'graphic.html', { 'csvObjectColumns': csvObject.columns })
+        LabelsColumns = json.dumps(csvObject.columns.values.tolist())
+        valuesColumns = csvObject.values.tolist()
+        typeCharts    = request.POST.get('group1')
+        return render(
+                    request, 
+                    'graphic.html', 
+                    { 
+                        'labelsColumns': LabelsColumns, 
+                        'valuesColumns': valuesColumns,
+                        'typeChart':  typeCharts
+                    }
+                )
     return render(request, 'importExcel.html')
-    
