@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <title>Data Science</title>
+        <!-- Compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        <!-- Compiled and minified JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.bundle.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Data Science</h1>
+            <div class="row">
+                <canvas id="productsChart" width="300" height="300"></canvas>
+                {{ csvObjectColumns }}
+            </div>
+        </div>
+    </body>
+    <script>
+        var ctx = document.getElementById("productsChart");
+    </script>
+</html>
