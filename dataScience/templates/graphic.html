@@ -8,13 +8,21 @@
         <!-- Compiled and minified JavaScript -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.bundle.js"></script>
+        <style>
+            a {
+                text-decoration: none;
+                color: black;
+            }
+        </style>
     </head>
     <body>
         <div class="container">
             <div>
                 <h1>Data Science</h1>
-                <button href="/">
-                    Voltar
+                <button class="waves-effect btn">
+                    <a href="/">
+                        Voltar
+                    </a>
                 </button>
             </div>
             <div class="row">
@@ -31,7 +39,15 @@
         
         datas      = JSON.stringify(datas).replace('[[', '[').replace(']]', ']');
         datas      = JSON.parse(datas);
+        colorsDatas = '#015EA0';
 
+        if (typeChart != 'line') {
+            colorsDatas = [];
+            labels.forEach(element => {
+                colorsDatas.push(getRandomColor());
+            });
+        }
+        
         var GraphicChart = new Chart(ctx, {
             type: typeChart,
             data: {
@@ -39,8 +55,8 @@
                 datasets: [{
                     label: 'Graficos',
                     data: datas,
-                    backgroundColor: "#f38b4a" ,
-                    borderColor: 'rgba(255,99,132,1)' ,
+                    backgroundColor: colorsDatas,
+                    borderColor: colorsDatas,
                     borderWidth: 1
                 }]
             },
@@ -54,5 +70,14 @@
                 }
             }
         });
+
+        function getRandomColor() {
+            var letters = '0123456789ABCDEF'.split('');
+            var color = '#';
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
     </script>
 </html>

@@ -5,7 +5,7 @@ import json as json
 
 # Create your views here.
 def dataScienceHtml(request):
-    if request.method == 'POST' and request.FILES['my_file']:
+    if request.method == 'POST' and len(request.FILES) != 0:
         my_file = request.FILES['my_file']
         fs = FileSystemStorage()
         filename = fs.save(my_file.name, my_file)
@@ -23,4 +23,4 @@ def dataScienceHtml(request):
                         'typeChart':  typeCharts
                     }
                 )
-    return render(request, 'importExcel.html')
+    return render(request, 'importExcel.html', {'message': 'Selecione um arquivo para gerar o gráfico.'  })

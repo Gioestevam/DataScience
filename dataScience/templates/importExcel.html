@@ -49,7 +49,7 @@
                     <div>
                         <div class="row">
                             <div class="input-field col s6">
-                                <button class="waves-effect waves-light btn" type="submit">
+                                <button id="btn-process" class="waves-effect waves-light btn" type="submit">
                                     Processa
                                 </button>
                             </div>
@@ -59,4 +59,11 @@
             </div>
         </div>
     </body>
+    <script>
+        document.getElementById('btn-process').className = 'waves-effect waves-light btn disabled';
+
+        document.getElementById('last_name').onchange = function() {
+            document.getElementById('btn-process').className = 'waves-effect waves-light btn';
+        }
+    </script>
 </html>
